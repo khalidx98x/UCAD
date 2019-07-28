@@ -56,6 +56,15 @@
                        type="text"
                        class="form-control" placeholder="اسمك الأول">
             </div>
+
+            <div class="form-group">
+                <label>اسم العائلة </label>
+                <input value="{{isset(auth()->user()->studentpersonal)?auth()->user()->studentpersonal->fourth_name_en : old('fourth_name_en')}} "
+                       required name="fourth_name_en"
+                       type="text"
+                       class="form-control"
+                       placeholder=" اسم العائلة ">
+            </div>
         </div>
         <!-- /.box-body -->
     </div>
@@ -139,70 +148,59 @@
             </div>
 
 
+            <div class="form-group">
+                <input name="image" type='file' onchange="readURL(this);"/>
+                <img id="blah" src="{{isset(auth()->user()->studentpersonal)?asset('images/students_photos/'.auth()->user()->studentpersonal->image): old('image')}}" alt="your image" style="margin-left:50px"/>
+            </div>
+
             <!-- /.box-body -->
         </div>
 
-    </div>
-
-    <div class="col-md-4">
-        <div class="box-body">
-
-            <div class="form-group">
-                <label>اسم العائلة </label>
-                <input value="{{isset(auth()->user()->studentpersonal)?auth()->user()->studentpersonal->fourth_name_en : old('fourth_name_en')}} "
-                       required name="fourth_name_en"
-                       type="text"
-                       class="form-control"
-                       placeholder=" اسم العائلة ">
-            </div>
-        </div>
 
     </div>
+
 
     {{--White Space --}}
-    <div class="col-md-4">
-    </div>
+    {{--<div class="col-md-4">--}}
+    {{--</div>--}}
 
-    <div class="col-md-4">
-
-        <div class="row">
-            <div class="col-md-1"></div>
-
-            <div class="col-md-4">
+    {{--<div class="col-md-4">--}}
 
 
-                <div class="fileinput fileinput-new" data-provides="fileinput">
-
-                    <div class="fileinput-preview thumbnail"
-                         data-trigger="fileinput"
-                         style="width: 200px; height: 150px;">
-                        <img src="" id="profile-img-tag"/>
-
-                    </div>
+    {{--<div class="col-md-12">--}}
 
 
-                    <div>
+    {{--<div class="fileinput fileinput-new" data-provides="fileinput">--}}
+
+    {{--<div class="fileinput-preview thumbnail"--}}
+    {{--data-trigger="fileinput"--}}
+    {{--style="width: 200px; height: 150px;">--}}
+    {{--<img src="" id="profile-img-tag"/>--}}
+
+    {{--</div>--}}
 
 
-                        <span class="btn red btn-outline btn-file">
-                                            <input type="file" name="image" id="profile-img">
+    {{--<div>--}}
 
-                            <span class="btn btn-block btn-danger btn-xs">
-            حذف </span>
-            <span class="btn btn-block btn-primary btn-xs-new"
-                  style="width:200px;">
-            اضغط لاختيار صورة </span>
-            <span class="btn btn-block btn-primary btn-xs-exists">
-            تغيير </span>
-            </span>
-                        <a href="javascript:;" class="btn red fileinput-exists"
-                           data-dismiss="fileinput"> </a>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </div>
+    {{--<span class="btn red btn-outline btn-file">--}}
+    {{--<input type="file" name="image" id="profile-img">--}}
+
+    {{--<span class="btn btn-block btn-danger btn-xs">--}}
+    {{--حذف </span>--}}
+    {{--<span class="btn btn-block btn-primary btn-xs-new"--}}
+    {{--style="width:200px;">--}}
+    {{--اضغط لاختيار صورة </span>--}}
+    {{--<span class="btn btn-block btn-primary btn-xs-exists">--}}
+    {{--تغيير </span>--}}
+    {{--</span>--}}
+    {{--<a href="javascript:;" class="btn red fileinput-exists"--}}
+    {{--data-dismiss="fileinput"> </a>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+
+    {{--</div>--}}
 
 
     <input type="button" name="next" class="next action-button" value="التالي"/>

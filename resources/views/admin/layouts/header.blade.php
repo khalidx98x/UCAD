@@ -179,6 +179,8 @@
             background-color: #55b776;
         }
 
+
+        /*check box*/
     </style>
 
  {{--END  KHALID STYLE--}}
@@ -209,6 +211,9 @@
             html, body, h1, h2, h3, h4, h5, h6 {
                 font-family: 'Cairo', sans-serif;
             }
+
+
+
 
 
         </style>

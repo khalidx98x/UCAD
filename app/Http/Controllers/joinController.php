@@ -6,30 +6,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BackEnd\Student\StoreRequest;
 use App\Http\Requests\BackEnd\Student\UpdateRequest;
 use App\Schools;
-use App\Student;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 use Illuminate\Http\Request;
-
 use App\Studenthighschool;
 use App\Studentbridging;
 use App\Studentpersonal;
 use App\Studentacademic;
-use App\Healthstatus;
-use App\Religion;
-use App\Country;
-use App\Socialstatus;
-use App\City;
-use App\Region;
-use App\Specialneed;
-use App\Highschoolbranch;
 use App\Department;
-use App\Knowabout;
 use App\Major;
 use App\Plan;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -82,7 +68,6 @@ class joinController extends Controller
 
     public function create()
     {
-//        dd(isset(auth()->user()->studentpersonal));
 
         if (isset(auth()->user()->studentpersonal)) {
 
@@ -98,17 +83,15 @@ class joinController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      *
      */
-    public function storeTest(StoreRequest $request)
+    public function store(StoreRequest $request)
     {
         //upload image
         $request_data = $request->except(['image']);
-        Image::make($request->image)->resize(300, null)->save(public_path('images/students_photos/' . auth()->user()->id . '_' . $request->file('image')->getClientOriginalName()));
+        Image::make($request->image)->resize(250, 200)->save(public_path('images/students_photos/' . auth()->user()->id . '_' . $request->file('image')->getClientOriginalName()));
         $request_data['image'] = auth()->user()->id . '_' . $request->file('image')->getClientOriginalName();
 
 
         //fill the tables
-//        auth()->user()->studentpersonal->create($request_data);
-//        auth()->user()->studenthighschool->create($request_data);
         $request_data['student_id'] = auth()->user()->id;
         Studentpersonal::create($request_data);
         Studenthighschool::create($request_data);
@@ -157,7 +140,7 @@ class joinController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeTest(Request $request)
     {
 
 
@@ -225,14 +208,8 @@ class joinController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(/*$studentsPersonal, $studenthighschool, $studentbridging, $studentacademic*/)
+    public function edit()
     {
-
-//        Storage::disk('public')->delete('/images/students_photos/' . auth()->user()->studentpersonal->image);
-//        unlink('public/images/students  _photos/' . auth()->user()->studentpersonal->image);
-//        File::delete('images/students  _photos/' . auth()->user()->studentpersonal->image);
-
-//        dd(auth()->user()->studentpersonal->image);
 
         return (view('back-end.join.edit'));
 
@@ -247,19 +224,15 @@ class joinController extends Controller
      */
     public function update(UpdateRequest $request)
     {
-//        there is a problem in updating an image
 
 //        if  there is an image in the request
         $request_data = $request->all();
 
-//        $image = Studentpersonal::where("Student_id", auth()->user()->id)->pluck('image')->first();
-
-
         if ($request->has('image')) {
             $request_data = $request->except(['image']);
 
-            Storage::disk('public')->delete('/images/students_photos/' . auth()->user()->studentpersonal->image);
-            Image::make($request->image)->resize(300, null)->save(public_path('images/students_photos/' . auth()->user()->id . '_' . $request->file('image')->getClientOriginalName()));
+            Storage::disk('public_uploads')->delete('/students_photos/' . auth()->user()->studentpersonal->image);
+            Image::make($request->image)->resize(250, 200)->save(public_path('images/students_photos/' . auth()->user()->id . '_' . $request->file('image')->getClientOriginalName()));
             $request_data['image'] = auth()->user()->id . '_' . $request->file('image')->getClientOriginalName();
 
         }

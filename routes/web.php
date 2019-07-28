@@ -117,7 +117,7 @@ Route::group(['prefix' => 'join',], function () {
 
     Route::get('/', ['as' => 'join.index', 'uses' => 'joinController@index']);
     Route::get('/create', ['as' => 'join.create', 'uses' => 'joinController@create']);
-    Route::post('/store', ['as' => 'join.store', 'uses' => 'joinController@storeTest']);
+    Route::post('/store', ['as' => 'join.store', 'uses' => 'joinController@store']);
     Route::get('/edit', ['as' => 'join.edit', 'uses' => 'joinController@edit']);
     Route::post('/update', ['as' => 'join.update', 'uses' => 'joinController@update']);
 
